@@ -1,0 +1,16 @@
+body{
+	font-family: 'Titillium Web', sans-serif;
+	background-color: #E6E6E6;
+}
+main{
+	margin: 10px;
+}
+header{
+	padding: 10px;
+	background: #7753A1;
+}
+header h1{
+	text-align: center;
+	color: #F8F9F8;
+	margin: 0px;
+}
