@@ -11,20 +11,17 @@ class Controller{
 	grabQuery(){
 		let userInput = document.querySelector('input[type=text]')
 		let searchBtn = document.querySelector('#subBtn')
+		let p = document.querySelector('#resultContainer > p')
 		
 		searchBtn.addEventListener("click", (e) =>{
 			e.preventDefault()
-			// document.getElementById('results').innerHTML = ""
-			// let displayResults = document.querySelector('#results')
-			// if(displayResults.children.length){
-			// 	displayResults.parentNode.removeChild(displayResults)
-			// }
 			let query = userInput.value
+			p.innerHTML = 'Your Results: ' + query
 			const limit = "25"
 			const key = "89855b41a6b46d1e6a1cb3f21b1c8b5d"
 			const safe = "1"
 			let api = `https://api.flickr.com/services/rest/?method=flickr.photos.search&api_key=${key}&text=${query}&safe_search=${safe}&per_page=${limit}&format=json&nojsoncallback=1&ext`
-			var form = document.querySelector('form').reset()
+			let form = document.querySelector('form').reset()
 			console.log("search was clicked")
 			this.model.request(api);
 			this.sendResults();
@@ -76,31 +73,19 @@ class View{
 	}
 	displayResult(){
 		let element = document.querySelector('#results')
+		element.innerHTML= ''
 		let pictures = ''
-		element.innerHTML=''
-		// console.log("display now")
-		// let child = document.querySelector('#image')
-		// let temp = displayResults.firstChild
-		// console.log(temp)
-		// while(displayResults.firstChild){
-		// 	displayResults.removeChild(displayResults.firstChild);
-		// }
-		// if(displayResults.children.length){
-		// 	console.log(child.parentNode)
-		// 	let deletedItems = displayResults.removeChild(child)
-		// }
-		// console.log("POP! ",displayResults.firstChild)
 		let photoArr = this.photos
 		if(photoArr){
     		for (let i = 0; i < photoArr.length; i++){
 					pictures += '<li id="image">'
-					// pictures += '<h1>'+ i + '</h1>'
-					pictures += '<img src="https://farm'+ photoArr[i].farm+'.staticflickr.com/'+ photoArr[i].server +'/'+ photoArr[i].id + '_'+ photoArr[i].secret +'.jpg"/>'
-					pictures += '</li>'
+					 + '<img src="https://farm'+ photoArr[i].farm+'.staticflickr.com/'+ photoArr[i].server +'/'+ photoArr[i].id + '_'+ photoArr[i].secret +'.jpg"/>'
+					 + '</li>'
 				}
-			if(element !== null){
-				element.insertAdjacentHTML('beforeend', pictures);
-			}
+		}
+		if(element !== null){
+			
+			element.insertAdjacentHTML('beforeend', pictures);
 		}
 	}
 }

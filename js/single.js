@@ -11,7 +11,6 @@ var App = function () {
 		_classCallCheck(this, App);
 
 		console.log("Singleton was created");
-		// Create the instance of Controller here
 		var theController = new Controller();
 	}
 

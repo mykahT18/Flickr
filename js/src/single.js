@@ -3,7 +3,6 @@ console.log("This singleton script is loaded");
 class App{
 	constructor(){
 		console.log("Singleton was created");
-		// Create the instance of Controller here
 		const theController = new Controller();
 	}
 	static getInstance(){

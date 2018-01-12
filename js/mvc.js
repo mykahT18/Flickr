@@ -24,15 +24,12 @@ var Controller = function () {
 
 			var userInput = document.querySelector('input[type=text]');
 			var searchBtn = document.querySelector('#subBtn');
+			var p = document.querySelector('#resultContainer > p');
 
 			searchBtn.addEventListener("click", function (e) {
 				e.preventDefault();
-				// document.getElementById('results').innerHTML = ""
-				// let displayResults = document.querySelector('#results')
-				// if(displayResults.children.length){
-				// 	displayResults.parentNode.removeChild(displayResults)
-				// }
 				var query = userInput.value;
+				p.innerHTML = 'Your Results: ' + query;
 				var limit = "25";
 				var key = "89855b41a6b46d1e6a1cb3f21b1c8b5d";
 				var safe = "1";
@@ -116,31 +113,17 @@ var View = function () {
 		key: 'displayResult',
 		value: function displayResult() {
 			var element = document.querySelector('#results');
-			var pictures = '';
 			element.innerHTML = '';
-			// console.log("display now")
-			// let child = document.querySelector('#image')
-			// let temp = displayResults.firstChild
-			// console.log(temp)
-			// while(displayResults.firstChild){
-			// 	displayResults.removeChild(displayResults.firstChild);
-			// }
-			// if(displayResults.children.length){
-			// 	console.log(child.parentNode)
-			// 	let deletedItems = displayResults.removeChild(child)
-			// }
-			// console.log("POP! ",displayResults.firstChild)
+			var pictures = '';
 			var photoArr = this.photos;
 			if (photoArr) {
 				for (var i = 0; i < photoArr.length; i++) {
-					pictures += '<li id="image">';
-					// pictures += '<h1>'+ i + '</h1>'
-					pictures += '<img src="https://farm' + photoArr[i].farm + '.staticflickr.com/' + photoArr[i].server + '/' + photoArr[i].id + '_' + photoArr[i].secret + '.jpg"/>';
-					pictures += '</li>';
+					pictures += '<li id="image">' + '<img src="https://farm' + photoArr[i].farm + '.staticflickr.com/' + photoArr[i].server + '/' + photoArr[i].id + '_' + photoArr[i].secret + '.jpg"/>' + '</li>';
 				}
-				if (element !== null) {
-					element.insertAdjacentHTML('beforeend', pictures);
-				}
+			}
+			if (element !== null) {
+
+				element.insertAdjacentHTML('beforeend', pictures);
 			}
 		}
 	}]);
