@@ -22,7 +22,7 @@ class Controller{
 			let query = userInput.value
 			const limit = "25"
 			const key = "89855b41a6b46d1e6a1cb3f21b1c8b5d"
-			const safe = 1
+			const safe = "1"
 			let api = `https://api.flickr.com/services/rest/?method=flickr.photos.search&api_key=${key}&text=${query}&safe_search=${safe}&per_page=${limit}&format=json&nojsoncallback=1&ext`
 			var form = document.querySelector('form').reset()
 			console.log("search was clicked")
@@ -75,30 +75,32 @@ class View{
     },1000)
 	}
 	displayResult(){
+		let element = document.querySelector('#results')
+		let pictures = ''
+		element.innerHTML=''
 		// console.log("display now")
-		let displayResults = document.querySelector('#results')
-		let child = document.querySelector('#image')
-		let temp = displayResults.firstChild
-		console.log(temp)
-		while(temp){
-			var x = displayResults.removeChild(temp);
-		}
+		// let child = document.querySelector('#image')
+		// let temp = displayResults.firstChild
+		// console.log(temp)
+		// while(displayResults.firstChild){
+		// 	displayResults.removeChild(displayResults.firstChild);
+		// }
 		// if(displayResults.children.length){
 		// 	console.log(child.parentNode)
 		// 	let deletedItems = displayResults.removeChild(child)
 		// }
 		// console.log("POP! ",displayResults.firstChild)
 		let photoArr = this.photos
-		let pictures = ''
-		if(this.photos){
-			console.log(":) :) :)")
-    		for (let i = 0; i < this.photos.length; i++){
+		if(photoArr){
+    		for (let i = 0; i < photoArr.length; i++){
 					pictures += '<li id="image">'
-					+ '<h1>'+i+ '</h1>'
-					+ '<img src="https://farm'+ photoArr[i].farm+'.staticflickr.com/'+ photoArr[i].server +'/'+ photoArr[i].id + '_'+ photoArr[i].secret +'.jpg"/>'
-					+ '</li>'
+					// pictures += '<h1>'+ i + '</h1>'
+					pictures += '<img src="https://farm'+ photoArr[i].farm+'.staticflickr.com/'+ photoArr[i].server +'/'+ photoArr[i].id + '_'+ photoArr[i].secret +'.jpg"/>'
+					pictures += '</li>'
 				}
-			displayResults.insertAdjacentHTML('beforeend', pictures);
+			if(element !== null){
+				element.insertAdjacentHTML('beforeend', pictures);
+			}
 		}
 	}
 }
