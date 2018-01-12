@@ -4,13 +4,13 @@ var _createClass = function () { function defineProperties(target, props) { for 
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
-console.log("This singleton script is loaded");
+// console.log("This singleton script is loaded");
 
 var App = function () {
 	function App() {
 		_classCallCheck(this, App);
 
-		console.log("Singleton was created");
+		// console.log("Singleton was created");
 		var theController = new Controller();
 	}
 

@@ -12,7 +12,7 @@ class Controller{
 		let userInput = document.querySelector('input[type=text]')
 		let searchBtn = document.querySelector('#subBtn')
 		let p = document.querySelector('#resultContainer > p')
-		
+
 		searchBtn.addEventListener("click", (e) =>{
 			e.preventDefault()
 			let query = userInput.value
@@ -21,10 +21,9 @@ class Controller{
 			const key = "89855b41a6b46d1e6a1cb3f21b1c8b5d"
 			const safe = "1"
 			let api = `https://api.flickr.com/services/rest/?method=flickr.photos.search&api_key=${key}&text=${query}&safe_search=${safe}&per_page=${limit}&format=json&nojsoncallback=1&ext`
-			let form = document.querySelector('form').reset()
-			console.log("search was clicked")
-			this.model.request(api);
-			this.sendResults();
+			document.querySelector('form').reset()
+			this.model.request(api)
+			this.sendResults()
 		})
 	}
 	sendResults(){
@@ -45,13 +44,13 @@ class Model{
 				this.newData(data.photos.photo)		
 			})
 			.catch(error => {
-				console.log("Error in getting data.")
+				alert("Error in getting data.")
 			})
 	}
 	newData(arr){
 		for (let i = 0; i < arr.length; i++) {
-			let tempResults = new PhotoDO(arr[i].farm, arr[i].id, arr[i].server, arr[i].secret );
-			this.results.push(tempResults);
+			let tempResults = new PhotoDO(arr[i].farm, arr[i].id, arr[i].server, arr[i].secret )
+			this.results.push(tempResults)
 		}
 		this.sendData(this.results)
 	}
@@ -72,20 +71,18 @@ class View{
     },1000)
 	}
 	displayResult(){
-		let element = document.querySelector('#results')
-		element.innerHTML= ''
+		let element = document.querySelector('.results')
+		element.innerHTML = ""
 		let pictures = ''
-		let photoArr = this.photos
-		if(photoArr){
-    		for (let i = 0; i < photoArr.length; i++){
+		if(this.photos.length > 0){
+    		for (let i = 0; i < this.photos.length; i++){
 					pictures += '<li id="image">'
-					 + '<img src="https://farm'+ photoArr[i].farm+'.staticflickr.com/'+ photoArr[i].server +'/'+ photoArr[i].id + '_'+ photoArr[i].secret +'.jpg"/>'
-					 + '</li>'
+					pictures += '<img src="https://farm'+ this.photos[i].farm+'.staticflickr.com/'+ this.photos[i].server +'/'+ this.photos[i].id + '_'+ this.photos[i].secret +'.jpg"/>'
+					pictures += '</li>'
 				}
-		}
-		if(element !== null){
-			
-			element.insertAdjacentHTML('beforeend', pictures);
+			}
+		if(element != null){
+			element.insertAdjacentHTML('beforeend', pictures)
 		}
 	}
 }

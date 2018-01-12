@@ -1,8 +1,8 @@
-console.log("This singleton script is loaded");
+// console.log("This singleton script is loaded");
 
 class App{
 	constructor(){
-		console.log("Singleton was created");
+		// console.log("Singleton was created");
 		const theController = new Controller();
 	}
 	static getInstance(){

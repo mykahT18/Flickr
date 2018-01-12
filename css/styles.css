@@ -40,7 +40,7 @@ header h1{
 	color: #F8F9F8;
 	margin: 0px;
 }
-#results{
+.results{
 	/*background-color: #E6E6E6;*/
 	display: flex;
 	flex-basis: 100%;
@@ -51,24 +51,24 @@ header h1{
 	height: 100vh;
   overflow: auto;
 }
-#results > li{
+.results > li{
 	align-self: auto;
 	margin-top: 30px;
 	flex-basis: 22%;
 }
 
 @media screen and (min-width: 320px) {
-   #results > li{
+   .results > li{
    	flex-basis: 100%;
    }
 }
 @media screen and (min-width: 768px) {
-   #results > li{
+   .results > li{
    	flex-basis: 49%;
    }
 }
 @media screen and (min-width: 1024px) {
-   #results > li{
+   .results > li{
    	flex-basis: 22%;
    }
 }

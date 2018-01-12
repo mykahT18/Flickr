@@ -34,8 +34,7 @@ var Controller = function () {
 				var key = "89855b41a6b46d1e6a1cb3f21b1c8b5d";
 				var safe = "1";
 				var api = 'https://api.flickr.com/services/rest/?method=flickr.photos.search&api_key=' + key + '&text=' + query + '&safe_search=' + safe + '&per_page=' + limit + '&format=json&nojsoncallback=1&ext';
-				var form = document.querySelector('form').reset();
-				console.log("search was clicked");
+				document.querySelector('form').reset();
 				_this.model.request(api);
 				_this.sendResults();
 			});
@@ -69,7 +68,7 @@ var Model = function () {
 			}).then(function (data) {
 				_this2.newData(data.photos.photo);
 			}).catch(function (error) {
-				console.log("Error in getting data.");
+				alert("Error in getting data.");
 			});
 		}
 	}, {
@@ -112,17 +111,17 @@ var View = function () {
 	}, {
 		key: 'displayResult',
 		value: function displayResult() {
-			var element = document.querySelector('#results');
-			element.innerHTML = '';
+			var element = document.querySelector('.results');
+			element.innerHTML = "";
 			var pictures = '';
-			var photoArr = this.photos;
-			if (photoArr) {
-				for (var i = 0; i < photoArr.length; i++) {
-					pictures += '<li id="image">' + '<img src="https://farm' + photoArr[i].farm + '.staticflickr.com/' + photoArr[i].server + '/' + photoArr[i].id + '_' + photoArr[i].secret + '.jpg"/>' + '</li>';
+			if (this.photos.length > 0) {
+				for (var i = 0; i < this.photos.length; i++) {
+					pictures += '<li id="image">';
+					pictures += '<img src="https://farm' + this.photos[i].farm + '.staticflickr.com/' + this.photos[i].server + '/' + this.photos[i].id + '_' + this.photos[i].secret + '.jpg"/>';
+					pictures += '</li>';
 				}
 			}
-			if (element !== null) {
-
+			if (element != null) {
 				element.insertAdjacentHTML('beforeend', pictures);
 			}
 		}
