@@ -5,5 +5,7 @@
 # Instructions
 
 cd into Flickr directory
+
 run: npm i
+
 run server: gulp watch
