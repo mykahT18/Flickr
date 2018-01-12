@@ -1,16 +1,16 @@
-"use strict";
+'use strict';
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
-console.log("MVC loaded");
+// console.log("MVC loaded")
 
 var Controller = function () {
 	function Controller() {
 		_classCallCheck(this, Controller);
 
-		console.log("Controller was made.");
+		// console.log("Controller was made.")
 		this.dataResults = [];
 		this.model = new Model();
 		this.view = new View();
@@ -18,7 +18,7 @@ var Controller = function () {
 	}
 
 	_createClass(Controller, [{
-		key: "grabQuery",
+		key: 'grabQuery',
 		value: function grabQuery() {
 			var _this = this;
 
@@ -27,18 +27,24 @@ var Controller = function () {
 
 			searchBtn.addEventListener("click", function (e) {
 				e.preventDefault();
+				// document.getElementById('results').innerHTML = ""
+				// let displayResults = document.querySelector('#results')
+				// if(displayResults.children.length){
+				// 	displayResults.parentNode.removeChild(displayResults)
+				// }
 				var query = userInput.value;
 				var limit = "25";
 				var key = "89855b41a6b46d1e6a1cb3f21b1c8b5d";
 				var safe = 1;
-				var api = "https://api.flickr.com/services/rest/?method=flickr.photos.search&api_key=" + key + "&text=" + query + "&safe_search=" + safe + "&per_page=" + limit + "&format=json&nojsoncallback=1&ext";
+				var api = 'https://api.flickr.com/services/rest/?method=flickr.photos.search&api_key=' + key + '&text=' + query + '&safe_search=' + safe + '&per_page=' + limit + '&format=json&nojsoncallback=1&ext';
 				var form = document.querySelector('form').reset();
+				console.log("search was clicked");
 				_this.model.request(api);
 				_this.sendResults();
 			});
 		}
 	}, {
-		key: "sendResults",
+		key: 'sendResults',
 		value: function sendResults() {
 			this.dataResults = this.model.sendData();
 			this.view.setData(this.dataResults);
@@ -52,12 +58,12 @@ var Model = function () {
 	function Model() {
 		_classCallCheck(this, Model);
 
-		console.log("Model was made.");
+		// console.log("Model was made.")
 		this.results = [];
 	}
 
 	_createClass(Model, [{
-		key: "request",
+		key: 'request',
 		value: function request(url) {
 			var _this2 = this;
 
@@ -70,7 +76,7 @@ var Model = function () {
 			});
 		}
 	}, {
-		key: "newData",
+		key: 'newData',
 		value: function newData(arr) {
 			for (var i = 0; i < arr.length; i++) {
 				var tempResults = new PhotoDO(arr[i].farm, arr[i].id, arr[i].server, arr[i].secret);
@@ -79,7 +85,7 @@ var Model = function () {
 			this.sendData(this.results);
 		}
 	}, {
-		key: "sendData",
+		key: 'sendData',
 		value: function sendData() {
 			return this.results;
 		}
@@ -92,12 +98,12 @@ var View = function () {
 	function View() {
 		_classCallCheck(this, View);
 
-		console.log("View was made.");
+		// console.log("View was made.")
 		this.photos = [];
 	}
 
 	_createClass(View, [{
-		key: "setData",
+		key: 'setData',
 		value: function setData(res) {
 			var _this3 = this;
 
@@ -107,16 +113,27 @@ var View = function () {
 			}, 1000);
 		}
 	}, {
-		key: "displayResult",
+		key: 'displayResult',
 		value: function displayResult() {
-			console.log("display now");
-			var displayResults = document.querySelector('.results');
+			// console.log("display now")
+			var displayResults = document.querySelector('#results');
+			var child = document.querySelector('#image');
+			var temp = displayResults.firstChild;
+			console.log(temp);
+			while (temp) {
+				var x = displayResults.removeChild(temp);
+			}
+			// if(displayResults.children.length){
+			// 	console.log(child.parentNode)
+			// 	let deletedItems = displayResults.removeChild(child)
+			// }
+			// console.log("POP! ",displayResults.firstChild)
 			var photoArr = this.photos;
 			var pictures = '';
-			displayResults.innerHTML = "";
 			if (this.photos) {
+				console.log(":) :) :)");
 				for (var i = 0; i < this.photos.length; i++) {
-					pictures += '<li>' + '<img src="https://farm' + photoArr[i].farm + '.staticflickr.com/' + photoArr[i].server + '/' + photoArr[i].id + '_' + photoArr[i].secret + '.jpg" />' + '</li>';
+					pictures += '<li id="image">' + '<h1>' + i + '</h1>' + '<img src="https://farm' + photoArr[i].farm + '.staticflickr.com/' + photoArr[i].server + '/' + photoArr[i].id + '_' + photoArr[i].secret + '.jpg"/>' + '</li>';
 				}
 				displayResults.insertAdjacentHTML('beforeend', pictures);
 			}
