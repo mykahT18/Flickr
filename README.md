@@ -1,6 +1,6 @@
 # Flickr
 ## Flickr Photo Search
-#### This is a small app that uses the API search feature.
+#### This is a small app that uses the Flickr API search feature.
 
 # Instructions
 
